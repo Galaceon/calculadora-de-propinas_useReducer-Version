@@ -9,7 +9,7 @@ import { initialState, orderReducer } from "./reducers/order-reducer"
 
 function App() {
 
-  const { order, addItem, removeItem, tip, setTip, placeOrder } = useOrder()
+  const { order, removeItem, tip, setTip, placeOrder } = useOrder()
 
   const[state, dispatch] = useReducer(orderReducer, initialState)
 
@@ -28,7 +28,7 @@ function App() {
               <MenuItem
                 key={item.id}
                 item={item}
-                addItem={addItem}
+                dispatch={dispatch}
               />
             ))}
           </div>
@@ -36,11 +36,11 @@ function App() {
         </div>
 
         <div className="border border-dashed border-slate-400 p-5 rounded-lg space-y-10">
-          {order.length > 0 ? (
+          {state.order.length > 0 ? (
             <>
 
               <OrderContest
-                order={order}
+                order={state.order}
                 removeItem={removeItem}
               />
     
