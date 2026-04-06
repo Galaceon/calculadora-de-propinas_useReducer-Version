@@ -41,7 +41,7 @@ function App() {
 
               <OrderContest
                 order={state.order}
-                removeItem={removeItem}
+                dispatch={dispatch}
               />
     
               <TipPercentageForm 

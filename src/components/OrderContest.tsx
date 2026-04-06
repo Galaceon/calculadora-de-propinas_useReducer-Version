@@ -1,12 +1,14 @@
 import { formatCurrency } from "../helpers"
-import type { MenuItem, OrderItem } from "../types"
+import type { OrderItem } from "../types"
+import type { ActionDispatch } from "react"
+import type { OrderActions } from "../reducers/order-reducer"
 
 type OrderContestProps = {
     order: OrderItem[],
-    removeItem: (id: MenuItem['id']) => void
+    dispatch: ActionDispatch<[action: OrderActions]>
 }
 
-export default function OrderContest({order, removeItem} : OrderContestProps) {
+export default function OrderContest({order, dispatch} : OrderContestProps) {
   return (
     <div>
         <h2 className='font-bold text-4xl'>Consumo</h2>
@@ -19,7 +21,7 @@ export default function OrderContest({order, removeItem} : OrderContestProps) {
                         <p className="font-bold">Cantidad: {item.quantity} - {formatCurrency(item.price * item.quantity)}</p>
                     </div>
 
-                    <button onClick={() => removeItem(item.id)} className="bg-red-600 h-8 w-8 rounded-full text-white font-black cursor-pointer">x</button>
+                    <button onClick={() => dispatch({type: "remove-item", payload: {id: item.id}})} className="bg-red-600 h-8 w-8 rounded-full text-white font-black cursor-pointer">x</button>
                 </div>
             ))}
         </div>

@@ -44,8 +44,13 @@ export const  orderReducer = (
 
     if(action.type === "remove-item") {
 
+            const updatedOrder = state.order.filter(item => item.id !== action.payload.id)
+
+            console.log(state, 'hola' ,updatedOrder)
+            
         return {
-            ...state
+            ...state,
+            order: updatedOrder
         }
     }
 
